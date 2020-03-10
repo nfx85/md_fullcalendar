@@ -22,7 +22,7 @@
 
             <trans-unit id="flexform.parent_category">
                 <source>Parent category for filter</source>
-                <target>Elternkategory für Filter</target>
+                <target>Elternkategorie für Filter</target>
             </trans-unit>
             <trans-unit id="flexform.view">
                 <source>Calendar view</source>
