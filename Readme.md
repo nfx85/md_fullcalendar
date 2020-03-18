@@ -34,7 +34,7 @@ Detail view:
     - `settings.timeFormat`: The format of the time. Default: `H:i`
     - `settings.pid.defaultDetailPid`: The Id of the page, where the detail view of an item is shown. On this page you have to insert the plugin `Calendar` of `ext:calendarize` with either `List + Detail` or `Detail only` mode.
     - `settings.showIcsIcalButton`: Flag for showing a button to download the event for inserting it into your own calendar  
-    - `persistence.storagePid`: Make sure to set the storagePid to the Pid, where the records of ext:calendarize are stored! 
+    - `persistence.storagePid`: Make sure to set the storagePid to the Pid, where the records of ext:calendarize are stored! Otherwise you can set the `Record Storage Page` individually in the plugin.
 - for TYPO3 >= 9 add following routeEnhancer:
 
 ```yaml
