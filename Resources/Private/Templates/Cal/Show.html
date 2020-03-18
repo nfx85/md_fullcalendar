@@ -55,7 +55,7 @@
                     fixedWeekCount: false,
                     //showNonCurrentDates: false, // In month view, whether dates in the previous or next month should be rendered at all.
                     events: {
-                        url: '/index.php?id=<f:format.raw>{contentObject.pid}</f:format.raw>&type=1573738558',
+                        url: '/index.php?id=<f:format.raw>{contentObject.pid}</f:format.raw>&type=1573738558&storage=<f:format.raw>{storagePid}</f:format.raw>',
                         failure: function(request, status, error) {
                             alert('There was an error while fetching events!');
                         },

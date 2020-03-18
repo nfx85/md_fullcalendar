@@ -67,6 +67,12 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $this->view->assign('categories', $allCategories);
         }
 
+        // pass storagePid to template in order to use it in ajax call listAction()
+        $storagePid = $this->configurationManager->getContentObject()->data['pages'];
+        if ($storagePid) {
+            $this->view->assign('storagePid', $storagePid);
+        }
+
         $this->view->assign('contentObject', $this->configurationManager->getContentObject()->data);
     }
 
@@ -79,11 +85,26 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function listAction()
     {
         $type = GeneralUtility::_GP('type');
+        $storagePid = GeneralUtility::_GP('storage');
         $selectedStart = new \DateTime(GeneralUtility::_GP('start'));
         $selectedEnd = new \DateTime(GeneralUtility::_GP('end'));
 
+        if ( !empty($storagePid) ) {
+            // sanitize input
+            $storagePid =  GeneralUtility::intExplode(',', $storagePid, true);
+            $storagePid = implode (',', $storagePid);
+
+            // set storagePid
+            $this->configurationManager->setConfiguration(
+                [
+                    'persistence' => [
+                        'storagePid' => $storagePid
+                    ],
+                ]
+            );
+        }
+
         $search = $this->indexRepository->findBySearch($selectedEnd, $selectedStart);
-        //\TYPO3\CMS\Core\Utility\DebugUtility::debug($search);
 
         if ($type == 1573738558) {
             $items = [];
