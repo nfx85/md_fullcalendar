@@ -87,7 +87,11 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $type = GeneralUtility::_GP('type');
         $storagePid = GeneralUtility::_GP('storage');
         $selectedStart = new \DateTime(GeneralUtility::_GP('start'));
+        $selectedStart = $selectedStart->setTime(00, 00, 00)->getTimestamp();
+
         $selectedEnd = new \DateTime(GeneralUtility::_GP('end'));
+        $selectedEnd = $selectedEnd->setTime(23, 59, 59)->getTimestamp();
+
 
         if ( !empty($storagePid) ) {
             // sanitize input
@@ -104,7 +108,7 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             );
         }
 
-        $search = $this->indexRepository->findBySearch($selectedEnd, $selectedStart);
+        $search = $this->indexRepository->findByTimeSlot($selectedEnd, $selectedStart);
 
         if ($type == 1573738558) {
             $items = [];
