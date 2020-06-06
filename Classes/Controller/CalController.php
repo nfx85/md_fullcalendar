@@ -86,12 +86,20 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $type = GeneralUtility::_GP('type');
         $storagePid = GeneralUtility::_GP('storage');
+
+        // set end day -1 in order to get all events for selected time span
         $selectedStart = new \DateTime(GeneralUtility::_GP('start'));
-        $selectedStart = $selectedStart->setTime(00, 00, 00)->getTimestamp();
+        $selectedStart = $selectedStart
+                            ->modify('-1 day')
+                            ->setTime(00, 00, 00)
+                            ->getTimestamp();
 
+        // set end day +1 in order to get all events for selected time span
         $selectedEnd = new \DateTime(GeneralUtility::_GP('end'));
-        $selectedEnd = $selectedEnd->setTime(23, 59, 59)->getTimestamp();
-
+        $selectedEnd = $selectedEnd
+                            ->modify('+1 day')
+                            ->setTime(23, 59, 59)
+                            ->getTimestamp();
 
         if ( !empty($storagePid) ) {
             // sanitize input
