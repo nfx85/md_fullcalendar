@@ -121,6 +121,8 @@
                     } else {
                         $('#calendar<f:format.raw>{contentObject.uid}</f:format.raw> .cal-item').removeClass('d-none');
                     }
+
+                    calendar<f:format.raw>{contentObject.uid}</f:format.raw>.refetchEvents();
                 });
 
             });
