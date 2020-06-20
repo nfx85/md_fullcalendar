@@ -1,3 +1,11 @@
+Version 1.1.0 (2020-06-20)
+    [FEATURE] compatibility for ext:calendarize 6.0.0
+    [BUGFIX] Get all events for selected time slot regardless to time zone
+    [BUGFIX] Remove plus button for a day, when selecting a category filter
+
+    All changes
+    https://github.com/cdaecke/md_fullcalendar/compare/1.1.0...1.1.1
+
 Version 1.1.0 (2020-03-18)
     [FEATURE] respect Record Storage Page in plugin
     [TASK] update version for dependency of ext:calendarize
