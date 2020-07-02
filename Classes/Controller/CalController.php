@@ -26,7 +26,7 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     protected $indexRepository;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
+     * @var \Mediadreams\MdFullcalendar\Domain\Repository\CategoryRepository
      */
     protected $categoryRepository;
 
@@ -43,9 +43,9 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * Inject the category repository to enable Dependency Injection
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository $categoryRepository
+     * @param \Mediadreams\MdFullcalendar\Domain\Repository\CategoryRepository $categoryRepository
      */
-    public function injectCategoryRepository(\TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository $categoryRepository)
+    public function injectCategoryRepository(\Mediadreams\MdFullcalendar\Domain\Repository\CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }
