@@ -21,34 +21,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
-     * @var HDNET\Calendarize\Domain\Repository\IndexRepository
+     * @var \HDNET\Calendarize\Domain\Repository\IndexRepository
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $indexRepository;
 
     /**
      * @var \Mediadreams\MdFullcalendar\Domain\Repository\CategoryRepository
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $categoryRepository;
-
-    /**
-     * Inject the index repository to enable Dependency Injection
-     *
-     * @param \HDNET\Calendarize\Domain\Repository\IndexRepository $indexRepository
-     */
-    public function injectIndexRepository(\HDNET\Calendarize\Domain\Repository\IndexRepository $indexRepository)
-    {
-        $this->indexRepository = $indexRepository;
-    }
-
-    /**
-     * Inject the category repository to enable Dependency Injection
-     *
-     * @param \Mediadreams\MdFullcalendar\Domain\Repository\CategoryRepository $categoryRepository
-     */
-    public function injectCategoryRepository(\Mediadreams\MdFullcalendar\Domain\Repository\CategoryRepository $categoryRepository)
-    {
-        $this->categoryRepository = $categoryRepository;
-    }
 
     /**
      * Show the calendar
@@ -79,7 +61,7 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * Get list of events
      * If "type" is provided, it will return values as json object
-     * 
+     *
      * @return void | json
      */
     public function listAction()
