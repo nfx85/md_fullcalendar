@@ -25,7 +25,7 @@
         "source": "https://github.com/cdaecke/md_fullcalendar"
     },
     "require": {
-		"typo3/cms-core": "^9.5 || ^10.4",
+        "typo3/cms-core": "^9.5 || ^10.4",
         "lochmueller/calendarize": ">=4.0,<8.0"
     },
     "autoload": {
@@ -33,8 +33,9 @@
             "Mediadreams\\MdFullcalendar\\": "Classes"
         }
     },
-    "replace": {
-        "mediadreams/md_fullcalendar": "self.version",
-        "typo3-ter/md-fullcalendar": "self.version"
-    }
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "md_fullcalendar"
+        }
+   }
 }
