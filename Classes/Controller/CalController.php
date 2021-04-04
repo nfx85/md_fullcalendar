@@ -73,15 +73,13 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $selectedStart = new \DateTime(GeneralUtility::_GP('start'));
         $selectedStart = $selectedStart
                             ->modify('-1 day')
-                            ->setTime(00, 00, 00)
-                            ->getTimestamp();
+                            ->setTime(00, 00, 00);
 
         // set end day +1 in order to get all events for selected time span
         $selectedEnd = new \DateTime(GeneralUtility::_GP('end'));
         $selectedEnd = $selectedEnd
                             ->modify('+1 day')
-                            ->setTime(23, 59, 59)
-                            ->getTimestamp();
+                            ->setTime(23, 59, 59);
 
         if ( !empty($storagePid) ) {
             // sanitize input
@@ -98,7 +96,7 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             );
         }
 
-        $search = $this->indexRepository->findByTimeSlot($selectedEnd, $selectedStart);
+        $search = $this->indexRepository->findByTimeSlot($selectedStart, $selectedEnd);
 
         if ($type == 1573738558) {
             $items = [];
