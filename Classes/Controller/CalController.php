@@ -12,6 +12,8 @@ namespace Mediadreams\MdFullcalendar\Controller;
  *
  ***/
 
+use HDNET\Calendarize\Domain\Repository\IndexRepository;
+use Mediadreams\MdFullcalendar\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -21,16 +23,28 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
-     * @var \HDNET\Calendarize\Domain\Repository\IndexRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var IndexRepository
      */
     protected $indexRepository;
 
     /**
-     * @var \Mediadreams\MdFullcalendar\Domain\Repository\CategoryRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var CategoryRepository
      */
     protected $categoryRepository;
+
+    /**
+     * CalController constructor
+     *
+     * @param IndexRepository $indexRepository
+     * @param CategoryRepository $categoryRepository
+     */
+    public function __construct(
+        IndexRepository $indexRepository,
+        CategoryRepository $categoryRepository
+    ) {
+        $this->indexRepository = $indexRepository;
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * Show the calendar
