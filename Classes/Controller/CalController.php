@@ -114,54 +114,57 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         if ($type == 1573738558) {
             $items = [];
+            /** @var \HDNET\Calendarize\Domain\Model\Index $el */
             foreach ($search as $el) {
-                $uri = $this->uriBuilder
-                    ->reset()
-                    ->setTargetPageUid($this->settings['pid']['defaultDetailPid'])
-                    ->uriFor(
-                        'detail',
-                        ['index' => $el->getUid()],
-                        'Calendar',
-                        'calendarize',
-                        'calendar'
-                    );
+                if ($el->getUniqueRegisterKey() === 'Event') {
+                    $uri = $this->uriBuilder
+                        ->reset()
+                        ->setTargetPageUid($this->settings['pid']['defaultDetailPid'])
+                        ->uriFor(
+                            'detail',
+                            ['index' => $el->getUid()],
+                            'Calendar',
+                            'calendarize',
+                            'calendar'
+                        );
 
-                $uriAjax = $this->uriBuilder
-                    ->reset()
-                    ->setTargetPageUid($this->settings['pid']['defaultDetailPid'])
-                    ->setTargetPageType(1573760945)
-                    ->uriFor(
-                        'detail',
-                        ['index' => $el->getUid()],
-                        'Cal',
-                        'mdfullcalendar',
-                        'cal'
-                    );
+                    $uriAjax = $this->uriBuilder
+                        ->reset()
+                        ->setTargetPageUid($this->settings['pid']['defaultDetailPid'])
+                        ->setTargetPageType(1573760945)
+                        ->uriFor(
+                            'detail',
+                            ['index' => $el->getUid()],
+                            'Cal',
+                            'mdfullcalendar',
+                            'cal'
+                        );
 
-                if ($el->isAllDay()) {
-                    $start = $el->getStartDateComplete()->format('Y-m-d');
-                    $end = $el->getEndDateComplete()->modify('+1 day')->format('Y-m-d');
-                } else {
-                    $start = $el->getStartDateComplete()->format('c');
-                    $end = $el->getEndDateComplete()->format('c');
+                    if ($el->isAllDay()) {
+                        $start = $el->getStartDateComplete()->format('Y-m-d');
+                        $end = $el->getEndDateComplete()->modify('+1 day')->format('Y-m-d');
+                    } else {
+                        $start = $el->getStartDateComplete()->format('c');
+                        $end = $el->getEndDateComplete()->format('c');
+                    }
+
+                    $items[] = [
+                        'id' => $el->getUid(),
+                        'title' => $el->getOriginalObject()->getTitle(),
+                        'abstract' => $el->getOriginalObject()->getAbstract(),
+                        'description' => $el->getOriginalObject()->getDescription(),
+                        'location' => $el->getOriginalObject()->getLocation(),
+                        'locationLink' => $el->getOriginalObject()->getLocationLink(),
+                        'organizer' => $el->getOriginalObject()->getOrganizer(),
+                        'organizerLink' => $el->getOriginalObject()->getOrganizerLink(),
+                        'start' => $start,
+                        'end' => $end,
+                        'allDay' => $el->isAllDay(),
+                        'className' => 'cal-item' . $this->getCssClasses($el->getOriginalObject()->getCategories()),
+                        'url' => $uri,
+                        'uriAjax' => $uriAjax,
+                    ];
                 }
-
-                $items[] = [
-                    'id' => $el->getUid(),
-                    'title' => $el->getOriginalObject()->getTitle(),
-                    'abstract' => $el->getOriginalObject()->getAbstract(),
-                    'description' => $el->getOriginalObject()->getDescription(),
-                    'location' => $el->getOriginalObject()->getLocation(),
-                    'locationLink' => $el->getOriginalObject()->getLocationLink(),
-                    'organizer' => $el->getOriginalObject()->getOrganizer(),
-                    'organizerLink' => $el->getOriginalObject()->getOrganizerLink(),
-                    'start' => $start,
-                    'end' => $end,
-                    'allDay' => $el->isAllDay(),
-                    'className' => 'cal-item'.$this->getCssClasses($el->getOriginalObject()->getCategories()),
-                    'url' => $uri,
-                    'uriAjax' => $uriAjax,
-                ];
             }
 
             return json_encode($items);
