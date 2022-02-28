@@ -22,7 +22,7 @@ Detail view:
 
 ## Requirements
 
-- TYPO3 >= 9.5
+- TYPO3 >= 10.4
 - ext:calendarize >= 8.0
 
 ## Installation

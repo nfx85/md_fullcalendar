@@ -1,3 +1,12 @@
+Version 3.0.0 (2022-02-28)
+    [FEATURE] Compatibility with TYPO3 11
+    [FEATURE] Compatibility with ext:calendarize >= v12
+    [!!!][TASK] Upgrade fullcalendar.io from v4.3.1 to v5.10.2
+    See following URL for upgrade path, if you have changed the template, CSS or JS: https://fullcalendar.io/docs/upgrading-from-v4
+
+    All changes
+    https://github.com/cdaecke/md_fullcalendar/compare/2.0.3...3.0.0
+
 Version 2.0.3 (2021-10-21)
     [FEATURE] Compatibility with ext:calendarize >= v11
 
