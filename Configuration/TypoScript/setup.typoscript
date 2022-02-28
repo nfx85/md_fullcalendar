@@ -42,15 +42,11 @@ plugin.tx_mdfullcalendar_cal {
 
 page {
     includeCSS {
-        mdFullcalendar = EXT:md_fullcalendar/Resources/Public/fullcalendar/packages/core/main.min.css
-        mdFullcalendar10 = EXT:md_fullcalendar/Resources/Public/fullcalendar/packages/daygrid/main.min.css
-        mdFullcalendar20 = EXT:md_fullcalendar/Resources/Public/fullcalendar/packages/timegrid/main.min.css
+        mdFullcalendar = EXT:md_fullcalendar/Resources/Public/fullcalendar/lib/main.min.css
     }
 
     includeJSFooterlibs {
-        mdFullcalendar = EXT:md_fullcalendar/Resources/Public/fullcalendar/packages/core/main.min.js
-        mdFullcalendar10 = EXT:md_fullcalendar/Resources/Public/fullcalendar/packages/daygrid/main.min.js
-        mdFullcalendar20 = EXT:md_fullcalendar/Resources/Public/fullcalendar/packages/timegrid/main.min.js
+        mdFullcalendar = EXT:md_fullcalendar/Resources/Public/fullcalendar/lib/main.min.js
     }
 }
 

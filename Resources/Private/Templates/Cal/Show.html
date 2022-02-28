@@ -42,14 +42,12 @@
                 var calendar<f:format.raw>{contentObject.uid}</f:format.raw> = new FullCalendar.Calendar(calendarEl<f:format.raw>{contentObject.uid}</f:format.raw>, {
                     firstDay: 1,
                     <f:format.raw>{f:if(condition: '{settings.language}', then: 'locale: \'{settings.language}\',')}</f:format.raw>
-                    plugins: ['dayGrid', 'timeGrid'],
-                    defaultView: '<f:format.raw>{settings.view}</f:format.raw>',
-                    header: {
+                    initialView: '<f:format.raw>{settings.view}</f:format.raw>',
+                    headerToolbar : {
                         left: 'prev,next today',
                         center: 'title',
                         right: 'dayGridMonth,timeGridWeek,timeGridDay'
                     },
-                    //editable: true, // this needs 'interaction' plugin
                     eventLimit: true, // when too many events in a day, show the popover
                     navLinks: true,
                     fixedWeekCount: false,
@@ -60,7 +58,7 @@
                             alert('There was an error while fetching events!');
                         },
                     },
-                    eventRender: function(item) {
+                    eventDidMount: function(item) {
                         // add title attribute
                         $(item.el).prop('title', item.event.extendedProps.abstract);
 

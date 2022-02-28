@@ -57,7 +57,7 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         if (!empty($this->settings['language'])) {
             $pageRender = GeneralUtility::makeInstance(PageRenderer::class);
-            $pageRender->addJsFooterFile('EXT:md_fullcalendar/Resources/Public/fullcalendar/packages/core/locales/' . $this->settings['language'] . '.js');
+            $pageRender->addJsFooterFile('EXT:md_fullcalendar/Resources/Public/fullcalendar/lib/locales/' . $this->settings['language'] . '.js');
         }
 
         if ($this->settings['category']) {
