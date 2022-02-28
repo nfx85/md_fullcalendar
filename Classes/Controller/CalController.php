@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Mediadreams\MdFullcalendar\Controller;
 
 /***
@@ -55,7 +57,7 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         if (!empty($this->settings['language'])) {
             $pageRender = GeneralUtility::makeInstance(PageRenderer::class);
-            $pageRender->addJsFooterFile('EXT:md_fullcalendar/Resources/Public/fullcalendar/packages/core/locales/'.$this->settings['language'].'.js');
+            $pageRender->addJsFooterFile('EXT:md_fullcalendar/Resources/Public/fullcalendar/packages/core/locales/' . $this->settings['language'] . '.js');
         }
 
         if ($this->settings['category']) {
@@ -86,19 +88,19 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         // set end day -1 in order to get all events for selected time span
         $selectedStart = new \DateTime(GeneralUtility::_GP('start'));
         $selectedStart = $selectedStart
-                            ->modify('-1 day')
-                            ->setTime(00, 00, 00);
+            ->modify('-1 day')
+            ->setTime(00, 00, 00);
 
         // set end day +1 in order to get all events for selected time span
         $selectedEnd = new \DateTime(GeneralUtility::_GP('end'));
         $selectedEnd = $selectedEnd
-                            ->modify('+1 day')
-                            ->setTime(23, 59, 59);
+            ->modify('+1 day')
+            ->setTime(23, 59, 59);
 
-        if ( !empty($storagePid) ) {
+        if (!empty($storagePid)) {
             // sanitize input
-            $storagePid =  GeneralUtility::intExplode(',', $storagePid, true);
-            $storagePid = implode (',', $storagePid);
+            $storagePid = GeneralUtility::intExplode(',', $storagePid, true);
+            $storagePid = implode(',', $storagePid);
 
             // set storagePid
             $this->configurationManager->setConfiguration(
@@ -119,7 +121,7 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 if ($el->getUniqueRegisterKey() === 'Event') {
                     $uri = $this->uriBuilder
                         ->reset()
-                        ->setTargetPageUid($this->settings['pid']['defaultDetailPid'])
+                        ->setTargetPageUid((int)$this->settings['pid']['defaultDetailPid'])
                         ->uriFor(
                             'detail',
                             ['index' => $el->getUid()],
@@ -130,7 +132,7 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
                     $uriAjax = $this->uriBuilder
                         ->reset()
-                        ->setTargetPageUid($this->settings['pid']['defaultDetailPid'])
+                        ->setTargetPageUid((int)$this->settings['pid']['defaultDetailPid'])
                         ->setTargetPageType(1573760945)
                         ->uriFor(
                             'detail',
@@ -191,11 +193,12 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param $categories The ObjectStorage with the categories
      * @return string
      */
-    private function getCssClasses($categories) {
+    private function getCssClasses($categories)
+    {
         $cssClasses = '';
 
         foreach ($categories as $category) {
-            $cssClasses .= ' category'.$category->getUid();
+            $cssClasses .= ' category' . $category->getUid();
         }
 
         return $cssClasses;

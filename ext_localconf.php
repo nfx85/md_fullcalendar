@@ -9,11 +9,11 @@ call_user_func(
             'Mediadreams.MdFullcalendar',
             'Cal',
             [
-                'Cal' => 'show, list, detail'
+                \Mediadreams\MdFullcalendar\Controller\CalController::class => 'show, list, detail'
             ],
             // non-cacheable actions
             [
-                'Cal' => ''
+                \Mediadreams\MdFullcalendar\Controller\CalController::class => ''
             ]
         );
 
