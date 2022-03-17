@@ -1,3 +1,9 @@
+Version 3.0.1 (2022-03-17)
+    [FEATURE] Add template layouts
+
+    All changes
+    https://github.com/cdaecke/md_fullcalendar/compare/3.0.0...3.0.1
+
 Version 3.0.0 (2022-02-28)
     [FEATURE] Compatibility with TYPO3 11
     [FEATURE] Compatibility with ext:calendarize >= v12
