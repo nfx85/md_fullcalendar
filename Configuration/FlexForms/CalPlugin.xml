@@ -317,6 +317,23 @@
                             </config>
                         </TCEforms>
                     </settings.category>
+
+                    <settings.templateLayout>
+                        <TCEforms>
+                            <label>LLL:EXT:md_fullcalendar/Resources/Private/Language/locallang_db.xlf:flexform.templateLayout</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <itemsProcFunc>Mediadreams\MdFullcalendar\Hooks\TemplateLayouts->getTemplateLayouts</itemsProcFunc>
+                                <items>
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0"></numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.templateLayout>
                 </el>
             </ROOT>
         </ewsfeusers_users>

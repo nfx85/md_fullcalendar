@@ -44,6 +44,10 @@
                 <source>Language of calendar</source>
                 <target>Sprache des Kalenders</target>
             </trans-unit>
+            <trans-unit id="flexform.templateLayout">
+                <source>Template layout</source>
+                <target>Template layout</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

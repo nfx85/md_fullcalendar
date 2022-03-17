@@ -53,6 +53,19 @@ routeEnhancers:
     - `Calendar view`: Select the initial view of the calendar (month, week, day)
     - `Parent category for filter`: Select a category of which the child categories are shown in a category filter on the calendar
 
+### Template layouts
+
+You are able to configure template layouts in TsConfig:
+
+```
+tx_mdfullcalendar_cal {
+  templateLayouts {
+    1 = First layout
+    2 = Second layout
+  }
+}
+```
+
 ## Bugs and Known Issues
 If you find a bug, it would be nice if you add an issue on [Github](https://github.com/cdaecke/md_fullcalendar/issues).
 
