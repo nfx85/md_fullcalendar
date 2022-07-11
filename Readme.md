@@ -53,6 +53,16 @@ routeEnhancers:
     - `Calendar view`: Select the initial view of the calendar (month, week, day)
     - `Parent category for filter`: Select a category of which the child categories are shown in a category filter on the calendar
 
+### Category colors
+You can use colors for the different categories in the filters and for the calendar entries.
+Just add the following to your stylesheet, whereas the number at the end of `.category123` is the id of the category:
+```css
+.tx-md-fullcalendar .category123 {
+    color: #fff;
+    background-color: red;
+}
+```
+
 ### Template layouts
 
 You are able to configure template layouts in TsConfig:
