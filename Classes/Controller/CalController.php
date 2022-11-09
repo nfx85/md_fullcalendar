@@ -116,9 +116,10 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         if ($type == 1573738558) {
             $items = [];
+            $i = 0;
             /** @var \HDNET\Calendarize\Domain\Model\Index $el */
             foreach ($search as $el) {
-                if ($el->getUniqueRegisterKey() === 'Event') {
+                if ($el->getUniqueRegisterKey() === 'Event' || $el->getUniqueRegisterKey() === 'News') {
                     $uri = $this->uriBuilder
                         ->reset()
                         ->setTargetPageUid((int)$this->settings['pid']['defaultDetailPid'])
@@ -150,15 +151,10 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                         $end = $el->getEndDateComplete()->format('c');
                     }
 
-                    $items[] = [
+                    $items[$i] = [
                         'id' => $el->getUid(),
                         'title' => $el->getOriginalObject()->getTitle(),
-                        'abstract' => $el->getOriginalObject()->getAbstract(),
                         'description' => $el->getOriginalObject()->getDescription(),
-                        'location' => $el->getOriginalObject()->getLocation(),
-                        'locationLink' => $el->getOriginalObject()->getLocationLink(),
-                        'organizer' => $el->getOriginalObject()->getOrganizer(),
-                        'organizerLink' => $el->getOriginalObject()->getOrganizerLink(),
                         'start' => $start,
                         'end' => $end,
                         'allDay' => $el->isAllDay(),
@@ -166,6 +162,18 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                         'url' => $uri,
                         'uriAjax' => $uriAjax,
                     ];
+
+                    if ($el->getUniqueRegisterKey() === 'News') {
+                        $items[$i]['abstract'] = $el->getOriginalObject()->getTeaser();
+                    } else {
+                        $items[$i]['abstract'] = $el->getOriginalObject()->getAbstract();
+                        $items[$i]['location'] = $el->getOriginalObject()->getLocation();
+                        $items[$i]['locationLink'] = $el->getOriginalObject()->getLocationLink();
+                        $items[$i]['organizer'] = $el->getOriginalObject()->getOrganizer();
+                        $items[$i]['organizerLink'] = $el->getOriginalObject()->getOrganizerLink();
+                    }
+
+                    $i++;
                 }
             }
 
