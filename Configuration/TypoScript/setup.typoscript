@@ -71,16 +71,10 @@ CALENDAR_AJAX {
     10 {
         userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
         extensionName = MdFullcalendar
-        pluginName = Cal
+        pluginName = CalList
         vendorName = Mediadreams
 
-        switchableControllerActions {
-            Cal {
-                1 = list
-            }
-        }
-
-        settings < plugin.tx_mdfullcalendar_cal
+        settings < plugin.tx_mdfullcalendar_cal.settings
         persistence.storagePid < plugin.tx_mdfullcalendar_cal.persistence.storagePid
     }
 }
@@ -96,7 +90,5 @@ CALENDAR_DETAIL_AJAX {
         }
     }
 
-    10 {
-        switchableControllerActions.Cal.1 = detail
-    }
+    10.pluginName = CalDetail
 }

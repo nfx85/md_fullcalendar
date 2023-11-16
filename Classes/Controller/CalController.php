@@ -16,6 +16,8 @@ namespace Mediadreams\MdFullcalendar\Controller;
 
 use HDNET\Calendarize\Domain\Repository\IndexRepository;
 use Mediadreams\MdFullcalendar\Domain\Repository\CategoryRepository;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -51,41 +53,48 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * Show the calendar
      *
-     * @return void
+     * @return ResponseInterface
      */
-    public function showAction()
+    public function showAction(): ResponseInterface
     {
         if (!empty($this->settings['language'])) {
             $pageRender = GeneralUtility::makeInstance(PageRenderer::class);
             $pageRender->addJsFooterFile('EXT:md_fullcalendar/Resources/Public/fullcalendar/lib/locales/' . $this->settings['language'] . '.js');
         }
 
-        if ($this->settings['category']) {
+        if (!empty($this->settings['category'])) {
             $allCategories = $this->categoryRepository->findByParent($this->settings['category']);
             $this->view->assign('categories', $allCategories);
         }
 
         // pass storagePid to template in order to use it in ajax call listAction()
-        $storagePid = $this->configurationManager->getContentObject()->data['pages'];
+        // TODO: Remove condition as soon, as TYPO3 v11 is not supported anymore
+        $versionInformation = GeneralUtility::makeInstance(Typo3Version::class);
+        $contentObject = ($versionInformation->getMajorVersion() >= 12) ?
+            $this->request->getAttribute('currentContentObject')->data :
+            $this->configurationManager->getContentObject()->data;
+
+        $storagePid = $contentObject['pages'];
         if ($storagePid) {
             $this->view->assign('storagePid', $storagePid);
         }
 
         $this->view->assign('contentObject', $this->configurationManager->getContentObject()->data);
+        return $this->htmlResponse();
     }
 
     /**
      * Get list of events
      * If "type" is provided, it will return values as json object
      *
-     * @return void | json
+     * @return ResponseInterface
      */
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
         $type = GeneralUtility::_GP('type');
         $storagePid = GeneralUtility::_GP('storage');
 
-        // set end day -1 in order to get all events for selected time span
+        // set start day -1 in order to get all events for selected time span
         $selectedStart = new \DateTime(GeneralUtility::_GP('start'));
         $selectedStart = $selectedStart
             ->modify('-1 day')
@@ -140,7 +149,7 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                             ['index' => $el->getUid()],
                             'Cal',
                             'mdfullcalendar',
-                            'cal'
+                            'caldetail'
                         );
 
                     if ($el->isAllDay()) {
@@ -177,11 +186,14 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 }
             }
 
-            return json_encode($items);
+            header('Content-Type: application/json');
+            echo json_encode($items);
             exit;
         } else {
             $this->view->assign('index', $search);
         }
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -190,9 +202,10 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param \HDNET\Calendarize\Domain\Model\Index $index
      * @return void
      */
-    public function detailAction(\HDNET\Calendarize\Domain\Model\Index $index)
+    public function detailAction(\HDNET\Calendarize\Domain\Model\Index $index): ResponseInterface
     {
         $this->view->assign('index', $index);
+        return $this->htmlResponse();
     }
 
     /**

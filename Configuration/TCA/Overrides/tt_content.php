@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3_MODE') || die();
+defined('TYPO3') or die();
 
 call_user_func(
     function()
@@ -8,7 +8,7 @@ call_user_func(
          * Register plugin
          */
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-            'Mediadreams.MdFullcalendar',
+            'MdFullcalendar',
             'Cal',
             'LLL:EXT:md_fullcalendar/Resources/Private/Language/locallang_db.xlf:tx_md_fullcalendar_cal.name'
         );
