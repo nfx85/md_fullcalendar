@@ -79,7 +79,10 @@ class CalController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $this->view->assign('storagePid', $storagePid);
         }
 
-        $this->view->assign('contentObject', $this->configurationManager->getContentObject()->data);
+        $this->view->assignMultiple([
+            'contentObject' => $contentObject,
+            'sitePath' => $this->request->getAttribute('normalizedParams')->getSitePath()
+        ]);
         return $this->htmlResponse();
     }
 
