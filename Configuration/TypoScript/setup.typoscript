@@ -31,7 +31,7 @@ plugin.tx_mdfullcalendar_cal {
         timeFormat = H:i
 
         pid {
-            defaultDetailPid =
+            defaultDetailPid = {$plugin.tx_mdfullcalendar_cal.feature.defaultDetailPid}
         }
 
         # if you enable this, make sure that you have set "defaultDetailPid" and there is a

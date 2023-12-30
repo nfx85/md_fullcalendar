@@ -3,6 +3,8 @@ plugin.tx_mdfullcalendar_cal {
     feature {
         # cat=plugin.tx_mdfullcalendar_cal/option; type=bool; label=Enable ical Link
         showIcsIcalButton = 0
+        # cat=plugin.tx_mdfullcalendar_cal/option; type=bool; label=Default Detail pid
+        defaultDetailPid =
     }
 
     view {
