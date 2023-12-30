@@ -36,7 +36,7 @@ plugin.tx_mdfullcalendar_cal {
 
         # if you enable this, make sure that you have set "defaultDetailPid" and there is a
         # ext:calendarize plugin inserted on that page.
-        showIcsIcalButton = 0
+        showIcsIcalButton = {$plugin.tx_mdfullcalendar_cal.feature.showIcsIcalButton}
     }
 }
 
